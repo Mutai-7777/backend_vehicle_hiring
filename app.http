@@ -1,0 +1,375 @@
+
+
+
+  ###all users
+  
+ GET http://localhost:3000/all
+
+### insert users
+
+POST http://localhost:3000/users
+Content-Type: application/json
+Accept: application/json
+
+ {
+    "user_id": 4,
+    "full_name": "Roro",
+    "email": "roro@gmail.com",
+    "contact_phone": 455555,
+    "address": "kutus",
+    "role": "admin"
+
+    }
+
+
+###insert a new user
+ POST http://localhost:3000/register
+  Content-Type: application/json
+  Accept: application/json
+
+   {
+    "user_id": 4,
+    "full_name": "roro",
+   "password": "mmm",
+    "email": "roro@gmail.com",
+    "role": "admin"
+   
+   
+   }
+
+
+
+
+
+###
+  POST http://localhost:3000/login
+    Content-Type: application/json
+
+    {    
+        "email": "roro@gmail.coms",
+   "password": "mmm"
+   
+
+    }
+
+###admin 
+  GET http://localhost:3000/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvcm9AZ21haWwuY29tcyIsInJvbGUiOiJhZG1pbiIsInVzZXJfaWQiOjQsImV4cCI6MTcyMDExMDQ3M30.3rETVbvA6cjP1YuZ6aCgBkGrLB9NsdA3vVkKzkJVN-k
+
+   ###
+POST   http://localhost:8000/login
+     Content-Type: application/json
+
+    {
+       "username": "zinadene",
+   "password": "ddd"
+
+    }
+
+###user // non admin
+GET http://localhost:3000/users/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1lc3NpIiwicm9sZSI6InVzZXIiLCJ1c2VySWQiOjMsImV4cCI6MTcxODI5MDUxN30.VupM3kfH5IDHrb9LtN8nVEBC5SNaipomqityWEmL5p0
+
+
+
+
+### Bookings
+GET http://localhost:3000/bookings/
+
+### insert Bookings
+
+POST http://localhost:3000/bookings
+Content-Type: application/json
+Accept: application/json
+
+{
+    "booking_id": 4,
+    "user_id": 1,
+    "vehicle_id": 1,
+    "location_id": 4,
+    "booking_date": "2022-02-02",
+    "return_date": "2022-02-08",
+    "total_amount": 399000,
+    "booking_status": "Pending"
+}
+
+### update  Bookings
+
+PUT http://localhost:3000/bookings/2
+Content-Type: application/json
+Accept: application/json
+
+{
+   
+}
+
+### delete  Bookings
+
+DELETE http://localhost:3000/
+
+
+
+
+
+
+
+### get Customer Support
+
+
+GET http://localhost:3000/customer-support/
+
+###insert Customer Support
+
+POST http://localhost:3000/customer-support
+Content-Type: application/json
+Accept: application/json
+
+{
+         "ticket_id": 5,
+    "user_id": 3,
+    "subject": "Screen",
+    "description": "Screen Failure",
+    "status": "Pending"
+}
+        
+
+
+
+
+###update Customer Support
+
+PUT http://localhost:3000/customer-support/2
+Content-Type: application/json
+Accept: application/json
+
+{
+         "status": "Pending"
+
+}
+
+###delete Customer Support
+
+DELETE http://localhost:3000/customer-support/3
+
+
+
+
+
+
+###get fleet
+
+GET http://localhost:3000/fleet/1
+
+###insert fleet
+
+POST http://localhost:3000/fleet
+Content-Type: application/json
+Accept: application/json
+
+ {
+     "fleet_id": 3,
+    "vehicle_id": 4,
+    "acquisition_date": "2022-05-10",
+    "depreciation_rate": 10,
+    "current_value": 340000,
+    "maintenance_cost": 4455,
+    "status": "Active"
+    }
+
+###update fleet
+
+PUT http://localhost:3000/fllet
+Content-Type: application/json
+Accept: application/json
+
+{
+   "name":"houston",
+    "code":3490,
+    "city":"Mississipi"
+
+}
+
+###delete fleet
+
+DELETE http://localhost:3000/
+
+
+
+
+
+### get location
+
+GET http://localhost:3000/locations
+
+###insert location
+
+POST http://localhost:3000/locations
+Content-Type: application/json
+Accept: application/json
+
+{
+   "location_id": 3,
+    "name": "Kansas",
+    "address": "kansas2333",
+    "contact_phone": 789933
+
+
+}
+
+###update location
+
+PUT http://localhost:3000/locations/4
+Content-Type: application/json
+Accept: application/json
+
+{
+   
+ "name": "Kentucky"
+
+
+}
+
+###delete location
+
+DELETE http://localhost:3000/locations/4
+
+
+
+
+
+
+### get payments
+
+GET http://localhost:3000/payments/1
+
+###insert payments
+
+POST http://localhost:3000/payments
+Content-Type: application/json
+Accept: application/json
+
+{
+        
+    "payment_id": 4,
+    "booking_id": 2,
+    "amount": 77899,
+    "payment_status": "Pending",
+    "payment_date": "2012-07-9",
+    "payment_method": "Bank",
+    "transaction_id": 455   
+
+}
+      
+
+
+
+
+###update payment
+
+PUT http://localhost:3000/payments/1
+Content-Type: application/json
+Accept: application/json
+
+{
+   
+     "payment_status": "Pending"
+
+
+}
+
+###delete payment
+
+DELETE http://localhost:3000/
+
+
+
+
+
+
+
+###get vehicles
+
+GET http://localhost:3000/vehicles
+
+###insert vehicles
+
+POST http://localhost:3000/vehicles
+Content-Type: application/json
+Accept: application/json
+
+{
+     "vehicleSpec_id": 5,
+    "vehicle_id": 4,
+    "rental_rate": 45555,
+    "availability": "false"
+
+
+}
+
+###update vehicles
+
+PUT http://localhost:3000/vehicles/2
+Content-Type: application/json
+Accept: application/json
+
+{
+   "rental_rate": 6000
+
+}
+
+###delete vehicle
+
+DELETE http://localhost:3000/vehicles/3
+
+
+
+
+
+
+
+###get vehicle specific information
+
+GET http://localhost:3000/vehicle-specifications
+
+###insert 
+
+POST http://localhost:3000/vehicle-specifications
+Content-Type: application/json
+Accept: application/json
+
+{
+     "vehicle_id": 3,
+    "manufacturer": "Subaru",
+    "model": "SUV",
+    "year": 1970,
+    "fuel_type": "diesel",
+    "engine_capacity": 3400,
+    "transmission": "good",
+    "seating_capacity": 3,
+    "color": "white",
+    "features": "good"
+
+}
+
+###update 
+
+PUT http://localhost:3000/vehicle-specifications/4
+Content-Type: application/json
+Accept: application/json
+
+{
+       "features": "double precision"
+
+}
+
+###delete 
+
+DELETE http://localhost:3000/vehicle-specifications/4
+
+
+
+
+
+
+
+
