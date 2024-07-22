@@ -42,7 +42,7 @@
     }
   }
 
-  //updating user
+ 
   export const updateUser = async(c:Context) => {
         const id = Number(c.req.param("id"));
         const user = await c.req.json();
