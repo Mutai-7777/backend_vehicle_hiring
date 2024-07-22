@@ -26,11 +26,10 @@ export const getBookingsService = async (id: number): Promise<TIBooking | undefi
 // };
 
 // Creating a new booking
-export const createBookingsService = async (booking: TIBooking) :Promise<string | undefined>=> {
-  await db.insert(BookingsTable).values(booking);
-  return  "Booking created successfully" ;
+export const createBookingsService = async (booking: TIBooking): Promise<TIBooking> => {
+  const [newBooking] = await db.insert(BookingsTable).values(booking).returning();
+  return newBooking;
 };
-
 
 // Updating booking
 export const updateBookingsService = async (id: number, booking: TIBooking) => {
