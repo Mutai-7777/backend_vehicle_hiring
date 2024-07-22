@@ -91,3 +91,9 @@ export const cancelBookingIfPaymentNotMade = async (booking_id: number) => {
     }
   }
 };
+
+//update payment session_id
+export const updatePaymentSessionIdService = async (session_id: string) =>{
+  await db.update(PaymentsTable).set({payment_status: "Completed"}).where(eq(PaymentsTable.transaction_id, session_id)).execute();
+  return 'PaymentSession updated successfully';
+}

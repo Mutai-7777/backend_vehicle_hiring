@@ -15,6 +15,7 @@ import { customerSupportRouter } from './CustomerSupport/CustomerSupport.router'
 import { vehicleSpecificationsRouter } from './VehicleSpecicifations/VehicleSpecifications.router'
 import { authRouter } from './auth/auth.router'
 import { cors} from 'hono/cors'
+import { handleStripeWebhook } from './Payments/Payments.controller';
 
 
 
@@ -50,6 +51,9 @@ app.route('/',fleetRouter) // fleet router)
 app.route('/',customerSupportRouter) // customer support router
 app.route('/',vehicleSpecificationsRouter) // vehicle specification router router
 app.route('/',authRouter) // authorization////register///login////)
+
+//stripe webhook
+app.post('/webhook', handleStripeWebhook)
 
 
 console.log(`Server is running on port ${process.env.PORT}`)
