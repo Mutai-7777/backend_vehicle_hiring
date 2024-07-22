@@ -16,15 +16,18 @@ EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."status" AS ENUM('Active', 'Inactive');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "authentication" (
 	"auth_id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
-	"email" varchar(255) NOT NULL,
-	"role" "role" DEFAULT 'user' NOT NULL,
 	"password" varchar(255) NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "authentication_email_unique" UNIQUE("email")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "bookings" (
@@ -45,7 +48,7 @@ CREATE TABLE IF NOT EXISTS "customer_support_tickets" (
 	"user_id" integer NOT NULL,
 	"subject" varchar(255) NOT NULL,
 	"description" text NOT NULL,
-	"status" varchar(255) NOT NULL,
+	"status" "status" DEFAULT 'Inactive' NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
@@ -57,7 +60,7 @@ CREATE TABLE IF NOT EXISTS "fleet_management" (
 	"depreciation_rate" numeric NOT NULL,
 	"current_value" numeric NOT NULL,
 	"maintenance_cost" numeric NOT NULL,
-	"status" varchar(255) NOT NULL,
+	"status" "status" DEFAULT 'Active' NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
@@ -112,9 +115,10 @@ CREATE TABLE IF NOT EXISTS "vehicles" (
 	"vehicleSpec_id" serial PRIMARY KEY NOT NULL,
 	"vehicle_id" integer NOT NULL,
 	"rental_rate" numeric NOT NULL,
-	"availability" boolean DEFAULT true NOT NULL,
+	"availability" "status" DEFAULT 'Active' NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT "vehicles_vehicle_id_unique" UNIQUE("vehicle_id")
 );
 --> statement-breakpoint
 DO $$ BEGIN

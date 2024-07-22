@@ -3,14 +3,15 @@ import { Context } from "hono";
 import { listFleet, getFleet, createFleet, updateFleet, deleteFleet } from "./Fleet.controller";
 import { zValidator } from "@hono/zod-validator";
 import { fleetSchema } from "../validators";
+import { adminRoleAuth,userRoleAuth } from "../middleware/middleAuth"
 
 export const fleetRouter = new Hono();
 
 // get all fleets
-fleetRouter.get("/fleet", listFleet);
+fleetRouter.get("/fleet", adminRoleAuth,listFleet);
 
 // get a single fleet
-fleetRouter.get("/fleet/:id", getFleet);
+fleetRouter.get("/fleet/:id",adminRoleAuth, getFleet);
 
 // create a fleet
 fleetRouter.post("/fleet", zValidator('json', fleetSchema, (result, c) => {

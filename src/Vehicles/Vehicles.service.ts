@@ -14,21 +14,21 @@ export const getVehiclesService = async (id: number): Promise<TIVehicle | undefi
 };
 
 // Creating a new vehicle
-export const createVehiclesService = async (vehicle: TIVehicle) => {
+export const createVehiclesService = async (vehicle: TIVehicle) :Promise<string | undefined> => {
   await db.insert(VehiclesTable).values(vehicle);
-  return { msg: "User created successfully" };
+  return "Vehicle created successfully";
 };
 
 // Updating vehicle
-export const updateVehiclesService = async (id: number, vehicle: TIVehicle) => {
+export const updateVehiclesService = async (id: number, vehicle: TIVehicle) :Promise<string | undefined> => {
   await db.update(VehiclesTable).set(vehicle).where(eq(VehiclesTable.vehicleSpec_id, id));
-  return { msg: "User updated successfully" };
+  return  "Vehicle updated successfully" ;
 };
 
 // Deleting vehicle
-export const deleteVehiclesService = async (id: number) => {
+export const deleteVehiclesService = async (id: number) :Promise<string | undefined>=> {
   await db.delete(VehiclesTable).where(eq(VehiclesTable.vehicleSpec_id, id));
-  return { msg: "User deleted successfully" };
+  return "Vehicle deleted successfully" ;
 };
 
 
@@ -41,7 +41,7 @@ export const VehicleTableWithOtherTables = async()=>{
   return await db.query.VehiclesTable.findMany({
 
     with:{
-      
+      booking:true,
     }
   })
 }

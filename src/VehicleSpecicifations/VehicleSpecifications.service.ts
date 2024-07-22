@@ -14,21 +14,21 @@ export const getVehicleSpecificationsService = async (id: number): Promise<TIVeh
 };
 
 // Creating a new vehicle specification
-export const createVehicleSpecificationsService = async (vehicleSpecification: TIVehicleSpec) => {
+export const createVehicleSpecificationsService = async (vehicleSpecification: TIVehicleSpec) :Promise<string | undefined> => {
   await db.insert(VehicleSpecificationsTable).values(vehicleSpecification);
-  return { msg: "User created successfully" };
+  return  "vehiclespec created successfully" ;
 };
 
 // Updating vehicle specification
 export const updateVehicleSpecificationsService = async (id: number, vehicleSpecification: TIVehicleSpec) => {
   await db.update(VehicleSpecificationsTable).set(vehicleSpecification).where(eq(VehicleSpecificationsTable.vehicle_id, id));
-  return { msg: "User updated successfully" };
+  return { msg: "vehicleSpec updated successfully" };
 };
 
 // Deleting vehicle specification
 export const deleteVehicleSpecificationsService = async (id: number) => {
   await db.delete(VehicleSpecificationsTable).where(eq(VehicleSpecificationsTable.vehicle_id, id));
-  return { msg: "User deleted successfully" };
+  return { msg: "Vehiclespec deleted successfully" };
 };
 
 

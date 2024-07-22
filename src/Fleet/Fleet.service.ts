@@ -27,15 +27,15 @@ export const getFleetService = async (id: number): Promise<TIfleet | undefined> 
 };
 
 // creating a new fleet
-export const createFleetService = async (fleet: TIfleet) => {
+export const createFleetService = async (fleet: TIfleet) :Promise<string | undefined>=> {
   await db.insert(FleetManagementTable).values(fleet);
-  return { msg: "Fleet created successfully" };
+  return  "Fleet created successfully" ;
 };
 
 // updating fleet
-export const updateFleetService = async (id: number, fleet: TIfleet) => {
+export const updateFleetService = async (id: number, fleet: TIfleet) :Promise<string | undefined>=> {
   await db.update(FleetManagementTable).set(fleet).where(eq(FleetManagementTable.fleet_id, id));
-  return { msg: "Fleet updated successfully" };
+  return "Fleet updated successfully" ;
 };
 
 // deleting fleet

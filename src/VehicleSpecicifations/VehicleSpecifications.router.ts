@@ -3,13 +3,15 @@ import { Context } from "hono";
 import { listVehicleSpecifications, getVehicleSpecifications, createVehicleSpecifications, updateVehicleSpecifications, deleteVehicleSpecifications } from "./VehicleSpecifications.controller";
 import { zValidator } from "@hono/zod-validator";
 import { vehicleSpecificationsSchema } from "../validators";
+import { adminRoleAuth,userRoleAuth } from "../middleware/middleAuth"
+
 
 export const vehicleSpecificationsRouter = new Hono();
 
 // Get all vehicle specifications
-vehicleSpecificationsRouter.get("/vehicle-specifications", listVehicleSpecifications);
+vehicleSpecificationsRouter.get("/vehicle-specifications",adminRoleAuth, listVehicleSpecifications);
 // Get a single vehicle specification
-vehicleSpecificationsRouter.get("/vehicle-specifications/:id", getVehicleSpecifications);
+vehicleSpecificationsRouter.get("/vehicle-specifications/:id",adminRoleAuth, getVehicleSpecifications);
 // Create a vehicle specification
 vehicleSpecificationsRouter.post("/vehicle-specifications", zValidator('json', vehicleSpecificationsSchema, (result, c) => {
   if (!result.success) {

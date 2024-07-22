@@ -4,26 +4,26 @@
 
     // Users
     export const userSchema = z.object({
-        user_id: z.number(),
+        user_id: z.number().default(0),
         full_name: z.string(),
         email: z.string().email(),
         contact_phone:z.number(),
         address:z.string(),
-        role: z.enum(["admin", "user"]),
+        role: z.enum(["admin", "user"]).default("user"),
        
     });
 
-      /////register user
-       export const registerUserSchema = z.object({
-        user_id: z.number(), 
-        full_name: z.string(),
-        email: z.string().email(),
+      ///// user
+       export const authSchema = z.object({
+        user_id: z.number().default(0), 
+       
+      
         role: z.enum(["admin", "user"]),
         password: z.string(),
        });
 
        ///login user
-       export const loginUserSchema = z.object({
+       export const loginSchema = z.object({
         email: z.string().email(),
         password: z.string(),
        });
@@ -31,16 +31,16 @@
 
     //vehicles
     export const vehiclesSchema = z.object({
-        vehicleSpec_id: z.number(),
+        vehicleSpec_id: z.number().default(0),
         vehicle_id: z.number(),
         rental_rate: z.number(),
-        availability: z.string(),
+        availability: z.enum(["Active", "Inactive"]).default("Active"),
        
     });
 
     //Vehicle Specifications
     export const vehicleSpecificationsSchema = z.object({
-        vehicle_id: z.number(),
+        vehicle_id: z.number().default(0),
         manufacturer: z.string(),
         model: z.string(),
         year: z.number(),
@@ -54,35 +54,33 @@
     });
 
 
-    //Bookings 
-    
-    export const bookingsSchema = z.object({
-        booking_id: z.number(),
-        user_id: z.number(),
-        vehicle_id: z.number(),
-        location_id: z.number(),
-        booking_date: z.preprocess((arg) => new Date(arg as string), z.date()),
-        return_date:  z.preprocess((arg) => new Date(arg as string), z.date()),
-        total_amount: z.number(),
-        booking_status: z.enum(["Pending", "Confirmed", "Cancelled"]),
-       
-    });
+   // Bookings 
+export const bookingsSchema = z.object({
+    booking_id: z.number().default(0),
+    user_id: z.number().transform((value) => Number(value)),
+    vehicle_id: z.number().transform((value) => Number(value)),
+    location_id: z.number().transform((value) => Number(value)),
+    booking_date: z.preprocess((arg) => new Date(arg as string), z.date()),
+    return_date:  z.preprocess((arg) => new Date(arg as string), z.date()),
+    total_amount: z.number(),
+    booking_status: z.enum(["Pending", "Confirmed", "Cancelled"]),
+});
 
     //Payment table
     export const paymentsSchema = z.object({
-        payment_id: z.number(),
-        booking_id: z.number(),
-        payment_method: z.string(),
-        amount: z.number(),
-       payment_date: z.preprocess((arg) => new Date(arg as string), z.date()),
-        transaction_id: z.number(),
-        payment_status: z.enum(["Pending", "Completed", "Failed"]),
+        payment_id: z.number().default(0),
+        booking_id: z.any(),
+        payment_method: z.any(),
+        amount: z.any(),
+       payment_date: z.any(),
+        transaction_id: z.any(),
+        payment_status: z.any(),
        
     });
 
     //CustomerSupport
     export const customerSupportSchema = z.object({
-        ticket_id: z.number(),
+        ticket_id: z.number().default(0),
         user_id: z.number(),
         subject: z.string(),
         description: z.string(),
@@ -92,7 +90,7 @@
 
     //Location
     export const locationsSchema = z.object({
-        location_id: z.number(),
+        location_id: z.number().default(0),
         name: z.string(),
         address: z.string(),
         contact_phone: z.number(),
@@ -101,7 +99,7 @@
 
     //Fleet
     export const fleetSchema = z.object({
-        fleet_id: z.number(),
+        fleet_id: z.number().default(0),
         vehicle_id: z.number(),
         acquisition_date: z.preprocess((arg) => new Date(arg as string), z.date()),
         depreciation_rate: z.number(),

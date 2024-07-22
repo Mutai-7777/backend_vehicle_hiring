@@ -16,9 +16,9 @@ export const getLocationService = async (id: number): Promise<TILocation | undef
 };
 
 // Service to create a new location
-export const createLocationService = async (location: TILocation) => {
-  await db.insert(LocationTable).values(location); // Updated table reference
-  return { msg: "Location created successfully" };
+export const createLocationService = async (location: TILocation) :Promise<string | undefined> => {
+  await db.insert(LocationTable).values(location); 
+  return "Location created successfully" ;
 };
 
 // Service to update a location

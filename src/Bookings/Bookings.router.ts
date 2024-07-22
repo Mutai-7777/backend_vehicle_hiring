@@ -3,6 +3,8 @@ import { Context } from "hono";
 import { listBookings, getBookings, createBookings, updateBookings, deleteBookings } from "./Bookings.controller";
 import { zValidator } from "@hono/zod-validator";
 import { bookingsSchema } from "../validators";
+import { adminRoleAuth,userRoleAuth } from "../middleware/middleAuth"
+
 
 export const bookingsRouter = new Hono();
 
@@ -10,6 +12,10 @@ export const bookingsRouter = new Hono();
 bookingsRouter.get("/bookings", listBookings);
 // Get a single booking
 bookingsRouter.get("/bookings/:id", getBookings);
+
+// // Get the latest booking by user_id and vehicle_id
+// bookingsRouter.get("/bookings/latest", getLatestBooking);
+
 // Create a booking
 bookingsRouter.post("/bookings", zValidator('json', bookingsSchema, (result, c) => {
   if (!result.success) {
@@ -18,7 +24,7 @@ bookingsRouter.post("/bookings", zValidator('json', bookingsSchema, (result, c) 
 }), createBookings);
 
 // Update a booking
-bookingsRouter.put("/bookings/:id", updateBookings);
+bookingsRouter.put("/bookings/:id",userRoleAuth,updateBookings);
 
 bookingsRouter.get("/bookings", zValidator('json', bookingsSchema, (result, c) => {
   if (!result.success) {
@@ -30,3 +36,6 @@ bookingsRouter.get("/bookings", zValidator('json', bookingsSchema, (result, c) =
 bookingsRouter.delete("/bookings/:id", deleteBookings);
 
 bookingsRouter.get("/bookings", getBookings);
+
+
+bookingsRouter.get("/bookings/latest", getBookings);

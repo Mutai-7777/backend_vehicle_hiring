@@ -1,5 +1,5 @@
 {
-  "id": "ca48bfd2-62f4-4836-9881-b811d5940192",
+  "id": "c0ae6703-6577-41c8-92d7-4e0c279a7872",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -19,20 +19,6 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "role": {
-          "name": "role",
-          "type": "role",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'user'"
         },
         "password": {
           "name": "password",
@@ -72,15 +58,7 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "authentication_email_unique": {
-          "name": "authentication_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "public.bookings": {
       "name": "bookings",
@@ -226,9 +204,11 @@
         },
         "status": {
           "name": "status",
-          "type": "varchar(255)",
+          "type": "status",
+          "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'Inactive'"
         },
         "created_at": {
           "name": "created_at",
@@ -307,9 +287,11 @@
         },
         "status": {
           "name": "status",
-          "type": "varchar(255)",
+          "type": "status",
+          "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'Active'"
         },
         "created_at": {
           "name": "created_at",
@@ -639,10 +621,11 @@
         },
         "availability": {
           "name": "availability",
-          "type": "boolean",
+          "type": "status",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": true
+          "default": "'Active'"
         },
         "created_at": {
           "name": "created_at",
@@ -676,7 +659,15 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "vehicles_vehicle_id_unique": {
+          "name": "vehicles_vehicle_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "vehicle_id"
+          ]
+        }
+      }
     }
   },
   "enums": {
@@ -704,6 +695,14 @@
       "values": [
         "user",
         "admin"
+      ]
+    },
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "Active",
+        "Inactive"
       ]
     }
   },

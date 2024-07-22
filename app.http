@@ -3,23 +3,29 @@
 
   ###all users
   
- GET http://localhost:3000/all
+ GET http://localhost:3000/users/6
+
 
 ### insert users
 
-POST http://localhost:3000/users
+POST http://localhost:3000/register
 Content-Type: application/json
 Accept: application/json
 
  {
-    "user_id": 4,
-    "full_name": "Roro",
-    "email": "roro@gmail.com",
+   
+    "full_name": "Yamal",
+    "email": "Yamal@gmail.com",
     "contact_phone": 455555,
     "address": "kutus",
-    "role": "admin"
+    "password": "mmm",
+    "role": "user"
+   
+   
+   }
+   
 
-    }
+    
 
 
 ###insert a new user
@@ -28,10 +34,10 @@ Accept: application/json
   Accept: application/json
 
    {
-    "user_id": 4,
-    "full_name": "roro",
+    "user_id": 5,
+    "full_name": "nnnn",
    "password": "mmm",
-    "email": "roro@gmail.com",
+    "email": "nnn@gmail.com",
     "role": "admin"
    
    
@@ -46,15 +52,16 @@ Accept: application/json
     Content-Type: application/json
 
     {    
-        "email": "roro@gmail.coms",
-   "password": "mmm"
+        "email": "pnpm@gmail.com",
+        "password": "mmm"
    
 
     }
 
 ###admin 
   GET http://localhost:3000/all
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvcm9AZ21haWwuY29tcyIsInJvbGUiOiJhZG1pbiIsInVzZXJfaWQiOjQsImV4cCI6MTcyMDExMDQ3M30.3rETVbvA6cjP1YuZ6aCgBkGrLB9NsdA3vVkKzkJVN-k
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDc5MzY5OCwiZXhwIjoxNzIwODA0NDk4fQ.j-L6NOp2OW2AplC4ichGafI4jrsFMpYvni0UywBsjHA
+
 
    ###
 POST   http://localhost:8000/login
@@ -67,26 +74,36 @@ POST   http://localhost:8000/login
     }
 
 ###user // non admin
-GET http://localhost:3000/users/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1lc3NpIiwicm9sZSI6InVzZXIiLCJ1c2VySWQiOjMsImV4cCI6MTcxODI5MDUxN30.VupM3kfH5IDHrb9LtN8nVEBC5SNaipomqityWEmL5p0
+GET http://localhost:3000/users/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDc4NjMyMiwiZXhwIjoxNzIwNzk3MTIyfQ.vmbziE9MIgjRgIbXWqgvfdp4z5xYOrK8Af8ya-a-X7g
 
 
+### delete  user
+
+DELETE http://localhost:3000/users/5
 
 
 ### Bookings
-GET http://localhost:3000/bookings/
+GET http://localhost:3000/bookings/6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDc4NjMyMiwiZXhwIjoxNzIwNzk3MTIyfQ.vmbziE9MIgjRgIbXWqgvfdp4z5xYOrK8Af8ya-a-X7g
+
+
+
+
+
+
 
 ### insert Bookings
 
-POST http://localhost:3000/bookings
+POST http://localhost:3000/bookings/
 Content-Type: application/json
 Accept: application/json
 
 {
-    "booking_id": 4,
-    "user_id": 1,
+    
+    "user_id": 2,
     "vehicle_id": 1,
-    "location_id": 4,
+    "location_id": 2,
     "booking_date": "2022-02-02",
     "return_date": "2022-02-08",
     "total_amount": 399000,
@@ -116,7 +133,8 @@ DELETE http://localhost:3000/
 ### get Customer Support
 
 
-GET http://localhost:3000/customer-support/
+GET http://localhost:3000/customer-support/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY5MzQwOSwiZXhwIjoxNzIwNzA0MjA5fQ.aoAtduKhEL14JUpcnNBeO6sx1J5oKyXajsvKxViDRQ8
 
 ###insert Customer Support
 
@@ -125,11 +143,11 @@ Content-Type: application/json
 Accept: application/json
 
 {
-         "ticket_id": 5,
+         
     "user_id": 3,
     "subject": "Screen",
     "description": "Screen Failure",
-    "status": "Pending"
+    "status": "Active"
 }
         
 
@@ -158,8 +176,8 @@ DELETE http://localhost:3000/customer-support/3
 
 ###get fleet
 
-GET http://localhost:3000/fleet/1
-
+GET http://localhost:3000/fleet/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY5MzQwOSwiZXhwIjoxNzIwNzA0MjA5fQ.aoAtduKhEL14JUpcnNBeO6sx1J5oKyXajsvKxViDRQ8
 ###insert fleet
 
 POST http://localhost:3000/fleet
@@ -167,8 +185,8 @@ Content-Type: application/json
 Accept: application/json
 
  {
-     "fleet_id": 3,
-    "vehicle_id": 4,
+    
+    "vehicle_id": 2,
     "acquisition_date": "2022-05-10",
     "depreciation_rate": 10,
     "current_value": 340000,
@@ -178,15 +196,12 @@ Accept: application/json
 
 ###update fleet
 
-PUT http://localhost:3000/fllet
+PUT http://localhost:3000/fleet/4
 Content-Type: application/json
 Accept: application/json
 
 {
-   "name":"houston",
-    "code":3490,
-    "city":"Mississipi"
-
+  "current_value": 13000
 }
 
 ###delete fleet
@@ -199,8 +214,8 @@ DELETE http://localhost:3000/
 
 ### get location
 
-GET http://localhost:3000/locations
-
+GET http://localhost:3000/locations/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY5MzQwOSwiZXhwIjoxNzIwNzA0MjA5fQ.aoAtduKhEL14JUpcnNBeO6sx1J5oKyXajsvKxViDRQ8
 ###insert location
 
 POST http://localhost:3000/locations
@@ -208,10 +223,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-   "location_id": 3,
-    "name": "Kansas",
+   
+    "name": "Maldives",
     "address": "kansas2333",
-    "contact_phone": 789933
+    "contact_phone": 78993
 
 
 }
@@ -241,7 +256,7 @@ DELETE http://localhost:3000/locations/4
 ### get payments
 
 GET http://localhost:3000/payments/1
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY5MzQwOSwiZXhwIjoxNzIwNzA0MjA5fQ.aoAtduKhEL14JUpcnNBeO6sx1J5oKyXajsvKxViDRQ8
 ###insert payments
 
 POST http://localhost:3000/payments
@@ -250,8 +265,8 @@ Accept: application/json
 
 {
         
-    "payment_id": 4,
-    "booking_id": 2,
+    
+    "booking_id": 1,
     "amount": 77899,
     "payment_status": "Pending",
     "payment_date": "2012-07-9",
@@ -289,8 +304,8 @@ DELETE http://localhost:3000/
 
 ###get vehicles
 
-GET http://localhost:3000/vehicles
-
+GET http://localhost:3000/vehicles/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY5MzQwOSwiZXhwIjoxNzIwNzA0MjA5fQ.aoAtduKhEL14JUpcnNBeO6sx1J5oKyXajsvKxViDRQ8
 ###insert vehicles
 
 POST http://localhost:3000/vehicles
@@ -298,10 +313,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-     "vehicleSpec_id": 5,
-    "vehicle_id": 4,
+     
+    "vehicle_id": 6,
     "rental_rate": 45555,
-    "availability": "false"
+    "availability": "Inactive"
 
 
 }
@@ -329,7 +344,8 @@ DELETE http://localhost:3000/vehicles/3
 
 ###get vehicle specific information
 
-GET http://localhost:3000/vehicle-specifications
+GET http://localhost:3000/vehicle-specifications/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY5MzQwOSwiZXhwIjoxNzIwNzA0MjA5fQ.aoAtduKhEL14JUpcnNBeO6sx1J5oKyXajsvKxViDRQ8
 
 ###insert 
 
@@ -338,8 +354,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-     "vehicle_id": 3,
-    "manufacturer": "Subaru",
+     
+    "manufacturer": "Mercedes",
     "model": "SUV",
     "year": 1970,
     "fuel_type": "diesel",

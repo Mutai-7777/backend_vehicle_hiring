@@ -37,9 +37,9 @@ export const VehicleSpecificationsTable = pgTable('vehicle_specifications', {
 // Vehicles Table
 export const VehiclesTable = pgTable('vehicles', {
     vehicleSpec_id: serial("vehicleSpec_id").primaryKey(),
-    vehicle_id: integer("vehicle_id").references(() => VehicleSpecificationsTable.vehicle_id, { onDelete: "cascade" }).notNull(),
+    vehicle_id: integer("vehicle_id").references(() => VehicleSpecificationsTable.vehicle_id, { onDelete: "cascade" }).notNull().unique(),
     rental_rate: decimal("rental_rate").notNull(),
-    availability: boolean("availability").default(true).notNull(),
+    availability: statusEnum("availability").default("Active").notNull(),
     created_at: timestamp("created_at").defaultNow().notNull(),
     updated_at: timestamp("updated_at").defaultNow().notNull()
 });
@@ -61,7 +61,7 @@ export const BookingsTable = pgTable('bookings', {
 // Payments Table
 export const PaymentsTable = pgTable('payments', {
     payment_id: serial("payment_id").primaryKey(),
-    booking_id: integer("booking_id").references(() => BookingsTable.booking_id, { onDelete: "cascade" }).notNull(),
+    booking_id: integer("booking_id").references(() => BookingsTable.booking_id, { onDelete: "cascade" }).notNull().unique(),
     amount: decimal("amount").notNull(),
     payment_status: paymentStatusEnum("payment_status").default("Pending").notNull(),
     payment_date: timestamp("payment_date").notNull(),
@@ -75,8 +75,8 @@ export const PaymentsTable = pgTable('payments', {
 export const AuthenticationTable = pgTable('authentication', {
     auth_id: serial("auth_id").primaryKey(),
     user_id: integer("user_id").references(() => UsersTable.user_id, { onDelete: "cascade" }).notNull(),
-    email: varchar("email", { length: 255 }).notNull().unique(),
-    role: roleEnum("role").default("user").notNull(),
+
+    
     password: varchar("password", { length: 255 }).notNull(),
     created_at: timestamp("created_at").defaultNow().notNull(),
     updated_at: timestamp("updated_at").defaultNow().notNull()
@@ -158,14 +158,6 @@ export const authRelations = relations(AuthenticationTable, ({ one}) => ({
     user: one(UsersTable, {
         fields: [AuthenticationTable.user_id],
         references: [UsersTable.user_id]
-    }),
-    email:one(UsersTable, {
-        fields: [AuthenticationTable.email],
-        references: [UsersTable.email]
-    }),
-    role: one(UsersTable, {
-        fields: [AuthenticationTable.role],
-        references: [UsersTable.role]
     })
 }));
 

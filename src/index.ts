@@ -14,12 +14,13 @@ import { fleetRouter } from './Fleet/Fleet.router'
 import { customerSupportRouter } from './CustomerSupport/CustomerSupport.router'
 import { vehicleSpecificationsRouter } from './VehicleSpecicifations/VehicleSpecifications.router'
 import { authRouter } from './auth/auth.router'
-
+import { cors} from 'hono/cors'
 
 
 
 
 const app = new Hono()
+app.use (cors());
 
 ///  in built middleware     
 app.use(logger())     //----time counter

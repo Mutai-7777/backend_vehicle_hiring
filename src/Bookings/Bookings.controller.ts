@@ -75,3 +75,21 @@ export const deleteBookings = async (c: Context) => {
     return c.json({ error: error?.message }, 400);
   }
 };
+
+
+// // Fetch the latest booking for given user and vehicle
+// export const getLatestBooking = async (c: Context) => {
+//   const user_id = parseInt(c.req.query("user_id"));
+//   const vehicle_id = parseInt(c.req.query("vehicle_id"));
+
+//   if (isNaN(user_id) || isNaN(vehicle_id)) {
+//     return c.text("Invalid user ID or vehicle ID", 400);
+//   }
+
+//   const booking = await getLatestBookingService(user_id, vehicle_id);
+//   if (booking == undefined) {
+//     return c.text("Booking not found", 404);
+//   }
+//   return c.json(booking, 200);
+// };
+

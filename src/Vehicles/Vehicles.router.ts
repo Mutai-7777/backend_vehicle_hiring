@@ -3,6 +3,8 @@ import { Context } from "hono";
 import { listVehicles, getVehicles, createVehicles, updateVehicles, deleteVehicles } from "./Vehicles.controller";
 import { zValidator } from "@hono/zod-validator";
 import { vehiclesSchema } from "../validators";
+import { adminRoleAuth,userRoleAuth } from "../middleware/middleAuth"
+
 
 export const vehiclesRouter = new Hono();
 

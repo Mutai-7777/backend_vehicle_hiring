@@ -11,12 +11,12 @@
 
 
 ////gets all users
-  userRouter.get("/users",adminRoleAuth,  listUsers); //(c:Context) => {
+  userRouter.get("/users",  listUsers); //(c:Context) => {
 //     return c.json(users, 200)
 //   }); 
 
   //get a single user
-  userRouter.get("/users/:id",userRoleAuth, getUser);
+  userRouter.get("/users/:id", getUser);
 
   //create a user
   userRouter.post("/users",zValidator('json',userSchema, (result,c)=>{
@@ -26,7 +26,7 @@
   }),createUser);
   
   //update a user
-  userRouter.put("/users/:id", updateUser); 
+  userRouter.put("/users/:id",userRoleAuth, updateUser); 
 
 
 userRouter.get("/users", zValidator('json',userSchema,(result,c)=>{

@@ -1,5 +1,5 @@
 import db from '../drizzle/db';
-import { eq } from "drizzle-orm";
+import { eq,desc } from "drizzle-orm";
 import { TIBooking, TSBooking } from '../drizzle/schema';
 import { BookingsTable } from '../drizzle/schema';
 
@@ -9,38 +9,39 @@ export const bookingsService = async (): Promise<TSBooking[] | null> => {
 
 export const getBookingsService = async (id: number): Promise<TIBooking | undefined> => {
   return await db.query.BookingsTable.findFirst({
-    where: eq(BookingsTable.booking_id, id),
-    with:{
-      location:true,
-      vehicle:{
-        columns:{
-          vehicle_id:true
-        
-          
-        }
-
-      }
-    }
+    where: eq(BookingsTable.booking_id, id)
   });
 };
 
+
+// // Fetch latest booking by user_id and vehicle_id
+// export const getLatestBookingService = async (user_id: number, vehicle_id: number): Promise<TIBooking | undefined> => {
+//   return await db.query.BookingsTable.findFirst({
+//     where: {
+//       user_id: user_id,
+//       vehicle_id: vehicle_id,
+//     },
+//     orderBy: desc(BookingsTable.created_at),
+//   });
+// };
+
 // Creating a new booking
-export const createBookingsService = async (booking: TIBooking) => {
+export const createBookingsService = async (booking: TIBooking) :Promise<string | undefined>=> {
   await db.insert(BookingsTable).values(booking);
-  return { msg: "User created successfully" };
+  return  "Booking created successfully" ;
 };
 
 
 // Updating booking
 export const updateBookingsService = async (id: number, booking: TIBooking) => {
   await db.update(BookingsTable).set(booking).where(eq(BookingsTable.booking_id, id));
-  return { msg: "User updated successfully" };
+  return { msg: "Booking updated successfully" };
 };
 
 // Deleting booking
 export const deleteBookingsService = async (id: number) => {
   await db.delete(BookingsTable).where(eq(BookingsTable.booking_id, id));
-  return { msg: "User deleted successfully" };
+  return { msg: "Booking deleted successfully" };
 };
 
 
@@ -63,4 +64,10 @@ export const BookingTableWithOtherTables = async()=>{
       }
     }
   })
-}
+};
+
+// Creating a new booking
+export const newBookingsService = async (booking: TIBooking) :Promise<string | undefined>=> {
+  await db.insert(BookingsTable).values(booking);
+  return  "Booking created successfully" ;
+};

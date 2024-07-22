@@ -2,16 +2,18 @@ import { Hono } from "hono";
 import { Context } from "hono";
 import { listLocations, getLocations, createLocations, updateLocations, deleteLocations } from "./Location.controller"; // Importing controller functions for locations
 import { zValidator } from "@hono/zod-validator";
-import { locationsSchema } from "../validators"; // Importing schema validator for locations
+import { locationsSchema } from "../validators"; 
+import { adminRoleAuth,userRoleAuth } from "../middleware/middleAuth"
+
 
 // Creating a new instance of Hono router
 export const locationsRouter = new Hono();
 
 // Endpoint to get all locations
-locationsRouter.get("/locations", listLocations);
+locationsRouter.get("/locations",adminRoleAuth, listLocations);
 
 // Endpoint to get a single location by ID
-locationsRouter.get("/locations/:id", getLocations);
+locationsRouter.get("/locations/:id",adminRoleAuth, getLocations);
 
 // Endpoint to create a new location
 locationsRouter.post("/locations", zValidator('json', locationsSchema, (result, c) => {

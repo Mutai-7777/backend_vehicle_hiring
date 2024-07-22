@@ -46,13 +46,13 @@ export const updatePayments = async (c: Context) => {
   const payment = await c.req.json();
   // Search user
   const searchedPayment = await getPaymentsService(id);
-  if (searchedPayment == undefined) return c.text("User not found", 404);
+  if (searchedPayment == undefined) return c.text("Payment not found", 404);
 
   // Get data and update
   const res = await updatePaymentsService(id, payment);
 
   // Return a success message
-  if (!res) return c.text("User not updated", 404);
+  if (!res) return c.text("Payment not updated", 404);
   return c.json({ msg: res }, 201);
 };
 
@@ -63,10 +63,10 @@ export const deletePayments = async (c: Context) => {
   try {
     // Search user
     const payment = await getPaymentsService(id);
-    if (payment == undefined) return c.text("User not found", 404);
+    if (payment == undefined) return c.text("Payment not found", 404);
     // Delete user
     const res = await deletePaymentsService(id);
-    if (!res) return c.text("User not deleted", 404);
+    if (!res) return c.text("Payment not deleted", 404);
     return c.json({ msg: res }, 201);
   } catch (error: any) {
     return c.json({ error: error?.message }, 400);
