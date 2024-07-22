@@ -13,8 +13,6 @@ bookingsRouter.get("/bookings", listBookings);
 // Get a single booking
 bookingsRouter.get("/bookings/:id", getBookings);
 
-// // Get the latest booking by user_id and vehicle_id
-// bookingsRouter.get("/bookings/latest", getLatestBooking);
 
 // Create a booking
 bookingsRouter.post("/bookings", zValidator('json', bookingsSchema, (result, c) => {

@@ -14,16 +14,6 @@ export const getBookingsService = async (id: number): Promise<TIBooking | undefi
 };
 
 
-// // Fetch latest booking by user_id and vehicle_id
-// export const getLatestBookingService = async (user_id: number, vehicle_id: number): Promise<TIBooking | undefined> => {
-//   return await db.query.BookingsTable.findFirst({
-//     where: {
-//       user_id: user_id,
-//       vehicle_id: vehicle_id,
-//     },
-//     orderBy: desc(BookingsTable.created_at),
-//   });
-// };
 
 // Creating a new booking
 export const createBookingsService = async (booking: TIBooking): Promise<TIBooking> => {
