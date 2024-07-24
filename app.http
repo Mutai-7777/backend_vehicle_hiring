@@ -84,7 +84,7 @@ DELETE http://localhost:3000/users/5
 
 
 ### Bookings
-GET http://localhost:3000/bookings/6
+GET http://localhost:3000/bookings/
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDc4NjMyMiwiZXhwIjoxNzIwNzk3MTIyfQ.vmbziE9MIgjRgIbXWqgvfdp4z5xYOrK8Af8ya-a-X7g
 
 
@@ -133,7 +133,7 @@ DELETE http://localhost:3000/
 ### get Customer Support
 
 
-GET http://localhost:3000/customer-support/1
+GET http://localhost:3000/customer-support/
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwbnBtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDY5MzQwOSwiZXhwIjoxNzIwNzA0MjA5fQ.aoAtduKhEL14JUpcnNBeO6sx1J5oKyXajsvKxViDRQ8
 
 ###insert Customer Support
@@ -266,7 +266,7 @@ Accept: application/json
 {
         
     
-    "booking_id": 1,
+    "booking_id": 59,
     "amount": 77899,
     "payment_status": "Pending",
     "payment_date": "2012-07-9",

@@ -8,10 +8,10 @@ import { adminRoleAuth,userRoleAuth } from "../middleware/middleAuth"
 export const fleetRouter = new Hono();
 
 // get all fleets
-fleetRouter.get("/fleet", adminRoleAuth,listFleet);
+fleetRouter.get("/fleet",listFleet);
 
 // get a single fleet
-fleetRouter.get("/fleet/:id",adminRoleAuth, getFleet);
+fleetRouter.get("/fleet/:id", getFleet);
 
 // create a fleet
 fleetRouter.post("/fleet", zValidator('json', fleetSchema, (result, c) => {
